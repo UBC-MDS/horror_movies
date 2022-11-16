@@ -36,20 +36,10 @@ when an individual is representing the project or its community.
 
 A working group of community members is committed to promptly addressing any
 reported issues. The working group is made up of pandas contributors and users.
-Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported by contacting the working group by e-mail (pandas-coc@googlegroups.com).
-Messages sent to this e-mail address will not be publicly visible but only to
-the working group members. The working group currently includes
 
-- Raul Aguilar
-- Hongjian(Sam) Li
-- Xinru Lu
-- Jacob Thomas
+Instances of abusive, harassing, or otherwise unacceptable behaviour may be reported by contacting the MDS team. An email to kvarada@cs.ubc.ca will be seen by Varada Kolhatkar, and an email to lourenzutti@stat.ubc.ca will be seen by Rodolfo Lourenzutti. To report a MDS code of conduct violation that will not be seen by Varada Kolhatkar or Rodolfo Lourenzutti, an alternative contact person is Milad Maymay, MDS Director, Program Operations & Student Management. His email is maymay@science.ubc.ca .
 
-All complaints will be reviewed and investigated and will result in a response
-that is deemed necessary and appropriate to the circumstances. Maintainers are
-obligated to maintain confidentiality with regard to the reporter of an
-incident.
+All complaints will be reviewed and investigated and will result in a response that is deemed necessary and appropriate to the circumstances. We are obligated to maintain confidentiality with regard to the reporter of an incident. Further details of specific enforcement policies may be posted separately.
 
 This Code of Conduct is adapted from the [Contributor Covenant][homepage],
 version 1.3.0, available at
