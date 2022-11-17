@@ -7,7 +7,7 @@ We are the team 11 for DSCI 522 course at UBC MDS program (Fall 2022, Block 3).
 - Raul Aguilar
 - Hongjian (Sam) Li
 - Xinru Lu
-- Jacob Thomas
+- Jakob Thoms
 
 ## Project Proposal
 
