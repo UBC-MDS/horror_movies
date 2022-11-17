@@ -7,7 +7,7 @@ Usage: src/down_data.R --url=<url> --out_file=<out_file>
 
 Options:
 --url=<url>              URL from where to download the data (must be in standard csv format)
---out_file=<out_file>    Path (including filename) of where to locally write the file
+--out_file=<out_file>    filename to locally write the file
 " -> doc
 
 library(docopt)
