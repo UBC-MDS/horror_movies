@@ -10,16 +10,16 @@ Options:
 --out_file=<out_file>    filename to locally write the file (filename only, saves to local /data/raw/)
 " -> doc
 
-# Imports
+# Setup command line functionality
 library(docopt)
-library(tidyverse)
-library(here)
-
-
 opt <- docopt(doc)
 
 # Main driver function
 main <- function(url, out_file){
+  
+  # Imports
+  library(tidyverse)
+  library(here)
   
   # Safeguard against invalid URLs
   dat <- NULL
