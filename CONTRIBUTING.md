@@ -20,7 +20,7 @@ bug, create an associated issue and illustrate the bug with a minimal
 ### Pull request process
 
 * We recommend that you create a Git branch for each pull request (PR).  
-* New code should follow the [tidyverse style guide](http://style.tidyverse.org) or [PEP 8 style guide](https://peps.python.org/pep-0008/)
+* New code should follow the [tidyverse style guide](http://style.tidyverse.org) or [PEP 8 style guide](https://peps.python.org/pep-0008/).
 * We use [roxygen2](https://cran.r-project.org/package=roxygen2), with
 [Markdown syntax](https://cran.r-project.org/web/packages/roxygen2/vignettes/rd-formatting.html),
 for documentation.  
