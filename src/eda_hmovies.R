@@ -4,6 +4,7 @@
 "Creates EDA plots for the pre-processed training data from the Horror Movies data.
 Saves the plots as png file.
 Usage: src/eda_hmovies.R --train=<train> --out_dir=<out_dir>
+Example: Rscript src/eda_hmovies.R --train='data/raw/horror_movies.csv' --out_dir='image/'
   
 Options:
 --train=<train>     Path (including filename) to training data (which needs to be saved as a csv file)
