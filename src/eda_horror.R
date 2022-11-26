@@ -44,6 +44,7 @@ main <- function(in_file, out_dir) {
   
   # EDA
 
+
   horror_scatter_bud <- horror_movies |>
     select(budget, revenue, vote_average) |>
     drop_na() |> 
@@ -147,5 +148,6 @@ main <- function(in_file, out_dir) {
          width = 8, 
          height = 10)
 }
+
 
 main(opt$in_file, opt$out_dir)
