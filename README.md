@@ -22,5 +22,15 @@ For exploratory data analysis, we will have a table for each numerical attribute
 For the analysis, we plan to have them on Jupyter Notebook. Therefore, the tables and plots will be saved as outputs. In the end, we will export the notebook as WebPDF to ensure proper display. 
 
 
+Dependencies: 
+- R version 4.2.2 with the following libraries:
+   - [docopt](https://github.com/docopt/docopt.R)
+   - [here](https://here.r-lib.org/)
+   - [tidyverse](https://www.tidyverse.org/)
+   - [infer](https://github.com/tidymodels/infer)
+   - [ggthemes](https://jrnold.github.io/ggthemes/)
+
+
+
 ## The MIT License
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  
