@@ -30,7 +30,7 @@ main <- function(in_file, out_file){
   # Safeguard against invalid filenames
   raw_dat <- NULL
   try({
-    raw_dat <- read_csv(in_path)
+    raw_dat <- read_csv(in_path, show_col_types = FALSE)
   })
   if (is.null(raw_dat)){
     print("Invalid filename supplied.")
@@ -46,7 +46,10 @@ main <- function(in_file, out_file){
               collection_name))|>
     # Drop movies with very low `vote_count` because
     # we are using the `vote_average` column.
-    filter(vote_count > 10) |>      
+    filter(vote_count > 10) |>  
+    # Drop movies with zero revenue because we are
+    # interested in those with non-zero revenue
+    filter(!revenue==0) |> 
     # Create a new column, `rating_group`, which is 'high' for observations
     # with `vote_average` greater than the median horror movie `vote_average`,
     # and 'low' otherwise.

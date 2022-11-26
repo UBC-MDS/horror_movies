@@ -1,7 +1,7 @@
 # author: Raul Aguilar, team 11
 # date: Nov 23, 2022
 
-"Creates EDA plots for the pre-processed training data from the horror movies dataset.
+"Creates EDA plots for the pre-processed data from the horror movies dataset.
 (from https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-11-01/horror_movies.csv).
 Saves the plots as png files.
 
@@ -11,7 +11,7 @@ Example: Rscript src/eda_hmovies.R --in_file='horror_movies_clean' --out_dir='im
 Options:
 --in_file=<in_file>       Filename of clean horror movie data (csv) 
                             (filename only, loads from local /data/clean/<in_file>.csv)
---out_dir=<out_dir>       Directory name where the plots should be saved (png)
+--out_dir=<out_dir>       Directory name where the plots should be saved
                             (relative to repo root, e.g. 'image', 'data/img', etc.)
 " -> doc
 
@@ -34,7 +34,7 @@ main <- function(in_file, out_dir) {
   # Safeguard against invalid filenames
   horror_movies <- NULL
   try({
-    horror_movies <- read_csv(in_path)
+    horror_movies <- read_csv(in_path, show_col_types = FALSE)
   })
   if (is.null(horror_movies)){
     print("Invalid filename supplied.")

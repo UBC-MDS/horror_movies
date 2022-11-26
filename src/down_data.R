@@ -26,7 +26,7 @@ main <- function(url, out_file){
   # Safeguard against invalid URLs
   dat <- NULL
   try({
-    dat <- read_csv(url)
+    dat <- read_csv(url, show_col_types = FALSE)
   })
   if (is.null(dat)){
     print("Invalid URL supplied.")
