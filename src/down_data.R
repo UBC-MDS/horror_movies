@@ -6,8 +6,10 @@
 Usage: src/down_data.R --url=<url> --out_file=<out_file>
 
 Options:
---url=<url>              URL from where to download the data (must be in standard csv format)
---out_file=<out_file>    Filename to locally write the file (csv) (filename only, saves to local /data/raw/)
+--url=<url>              URL from where to download the data 
+                           (must be in standard csv format)
+--out_file=<out_file>    Filename to locally write the file (csv) 
+                           (filename only, saves to local /data/raw/<out_file>.csv)
 " -> doc
 
 # Setup command line functionality

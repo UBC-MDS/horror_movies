@@ -7,8 +7,10 @@
 Usage: src/pre_process_horror.R --in_file=<in_file> --out_file=<out_file>
   
 Options:
---in_file=<in_file>       Filename of raw data (csv) (filename only, loads from local /data/raw/)
---out_file=<out_file>     Filename to locally write the file (csv) (filename only, saves to local /data/clean/)
+--in_file=<in_file>       Filename of raw horror movie data (csv) 
+                            (filename only, loads from local /data/raw/<in_file>.csv)
+--out_file=<out_file>     Filename to locally write clean horror movie data (csv) 
+                            (filename only, saves to local /data/clean/<out_file>.csv)
 " -> doc
 
 # Setup command line functionality
