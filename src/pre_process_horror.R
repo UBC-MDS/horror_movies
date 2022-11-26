@@ -1,52 +1,65 @@
 # author: Hongjian Li
 # date: 2022-11-25
 
-"Cleans and adds column to the horro movie dataset (from https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-11-01/horror_movies.csv).
-Writes the training and test data to separate csv files.
+"Cleans and adds column to the horror movie dataset 
+(from https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-11-01/horror_movies.csv).
 
-Usage: src/pre_process_horr.r --source_dir=<source_dir> --out_dir=<out_dir>
+Usage: src/pre_process_horror.R --in_file=<in_file> --out_file=<out_file>
   
 Options:
---source_dir=<source_dir>       Path (including filename) to raw data (data/raw/horror_movies.csv)
---out_dir=<out_dir>             Path to directory where the processed data should be written ((data/raw/clean.csv))
+--in_file=<in_file>       Filename of raw data (csv) (filename only, loads from local /data/raw/)
+--out_file=<out_file>     Filename to locally write the file (csv) (filename only, saves to local /data/clean/)
 " -> doc
 
+# Setup command line functionality
 library(docopt)
-library(tidyverse)
-library(caret)
-set.seed(522)
-
 opt <- docopt(doc)
-main <- function(source_dir,out_dir){
-  # read data and drop the columns we don't need
-  data<- read_csv(source_dir)
-  movies_clean <- select(data,-c(id, original_title,overview, 
-                                 tagline, poster_path, status, 
-                                 backdrop_path, collection, 
-                                 collection_name))|>
-    filter(vote_count>10)
+
+# Main driver function
+main <- function(in_file, out_file){
   
-movies_clean <- movies_clean|>
-  mutate(high_rating = case_when(
-  vote_average>=median(movies_clean$vote_average) ~ TRUE,
-  vote_average<median(movies_clean$vote_average) ~ FALSE
-  )
-)
+  # Imports
+  library(tidyverse)
+  library(here)
   
-# split into training and test data sets
-sample <- sample(c(TRUE, FALSE), 
-  nrow(movies_clean), 
-    replace=TRUE, 
-    prob=c(0.8,0.2))
-train  <- movies_clean[sample, ]
-test   <- movies_clean[!sample, ]
+  # Create the filepath to read the raw data from
+  in_path <- here() |> paste0("/data/raw/", in_file, ".csv")
   
-  # save the file to clean.csv
-write.csv(movies_clean, out_dir,row.names = F)
-  # save the training and testing set
-write.csv(train, 'data/raw/train.csv',row.names = F)
-write.csv(test, 'data/raw/test.csv',row.names = F)
+  # Safeguard against invalid filenames
+  raw_dat <- NULL
+  try({
+    raw_dat <- read_csv(in_path)
+  })
+  if (is.null(raw_dat)){
+    print("Invalid filename supplied.")
+    return()
+  }
   
+  # Clean the data
+  movies_clean <- raw_dat |>
+    # Drop the columns we don't need
+    select(-c(id, original_title, overview, 
+              tagline, poster_path, status, 
+              backdrop_path, collection, 
+              collection_name))|>
+    # Drop movies with very low `vote_count` because
+    # we are using the `vote_average` column.
+    filter(vote_count > 10) |>      
+    # Create a new column, `rating_group`, which is 'high' for observations
+    # with `vote_average` greater than the median horror movie `vote_average`,
+    # and 'low' otherwise.
+    mutate(
+      rating_group = case_when(
+        vote_average > median(vote_average) ~ 'high',
+        vote_average <= median(vote_average) ~ 'low',
+        TRUE ~ as.character(NA)
+      )                               
+    )
+
+  # Create the filepath to write the cleaned data to
+  out_path <- here() |> paste0("/data/clean/", out_file, ".csv")
+  
+  write_csv(movies_clean, out_path)
 }
 
-main(opt$source_dir, opt$out_dir)
+main(opt$in_file, opt$out_file)
