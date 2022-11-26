@@ -1,9 +1,14 @@
 # author: Jakob Thoms
 # date: 2022-11-26
 
-"FOO BAR it does some stuff using the CLEAN pre-processed data from the horror movies dataset.
+"Performs a simulation-based hypothesis test for the difference of median
+revenue of horror movies which have high/low average ratings using the
+pre-processed data from the horror movies dataset.
 (from https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-11-01/horror_movies.csv).
-Does this and that.
+
+Saves the results of the hypothesis test (summary stats, 
+observed test statistic, p-value, etc.) to two .csv files, and also creates two
+plots to visualize the results, which are saved as .png files. 
 
 Usage: src/inference_horror.R --in_file=<in_file> --out_dir=<out_dir>
 Example: Rscript src/inference_horror.R --in_file='horror_movies_clean' --out_dir='results'

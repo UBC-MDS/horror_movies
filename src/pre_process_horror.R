@@ -5,7 +5,8 @@
 (from https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-11-01/horror_movies.csv).
 
 Usage: src/pre_process_horror.R --in_file=<in_file> --out_file=<out_file>
-  
+Example: Rscript src/pre_process_horror.R --in_file='horror_movies_raw' --out_file='horror_movies_clean'
+
 Options:
 --in_file=<in_file>       Filename of raw horror movie data (csv) 
                             (filename only, loads from local /data/raw/<in_file>.csv)
