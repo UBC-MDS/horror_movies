@@ -2,7 +2,7 @@
 
 ## Authors
 
-We are the team 11 for DSCI 522 course at UBC MDS program (Fall 2022, Block 3). 
+We are team 11 for DSCI 522 of the UBC MDS program (2022/23 cohort). 
 
 - Raul Aguilar
 - Hongjian (Sam) Li
