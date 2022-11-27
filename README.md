@@ -41,6 +41,17 @@ Since we are doing inference about the median, a CLT-based approach is not appli
 For exploratory data analysis, we will have a table for each numerical attribute with their mean, median, quartiles and standard deviations so that we get a rough idea on the distribution of data values. In addition, we will create some tick plots. We will also have pairplots for the correlation between attributes to show the distribution of data points on a pair of attributes. 
 
 
+## Running the Analysis
+
+The current analysis pipeline is as follows:
+0. Clone the repo
+1. Open terminal and navigate to the root of the repo
+2. Run `rscript src/down_data.R --url=https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-11-01/horror_movies.csv --out_file=horror_movies_raw`
+3. Run `rscript src/pre_process_horror.R --in_file=horror_movies_raw --out_file=horror_movies_clean`
+4. Run `rscript src/eda_horror.R --in_file=horror_movies_clean --out_dir=image`
+5. Run `rscript src/inference_horror.R --in_file=horror_movies_clean --out_dir=results`
+
+This should populate the `/data`, `/image`, and `/results` directories of your repo with the most up-to-date data. 
 
 
 
