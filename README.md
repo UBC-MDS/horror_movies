@@ -1,4 +1,4 @@
-# A Simple Research on Horror Movie Dataset
+# A Simple Research on Horror Movie Revenue and Ratings
 
 ## Authors
 
