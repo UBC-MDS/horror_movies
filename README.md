@@ -1,4 +1,4 @@
-# A Simple Research on Horror Movie Revenue and Ratings
+# Horror Movie Revenue and Ratings
 
 ## Authors
 
