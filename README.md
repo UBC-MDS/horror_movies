@@ -14,6 +14,8 @@ We are team 11 for DSCI 522 of the UBC MDS program (2022/23 cohort).
 ### Dataset
 
 For this project, we are interested in a dataset consisting of information about a range of horror movies. The original dataset was adopted from the [tidytuesday repo](https://github.com/rfordatascience/tidytuesday/tree/master/data/2022/2022-11-01). The link to access the data is [here](https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-11-01/horror_movies.csv).
+   > A dataset about horror movies dating back to the 1950s. Data set was extracted from **[The Movie Database](https://www.themoviedb.org)** via the tmdb API using R <code>httr</code>. There are ~35K movie records in this dataset.
+   
 
 We will conduct inferential research with the dataset to determine the relationship between a horror movie's average rating and its revenue. Our population of interest will be the set of all horror movies with a non-zero revenue. The reason we add this non-zero revenue constraint is we are interested in comparing the median revenues of two subsets of the population (high/low rated), and in the raw dataset the vast majority of the movies have zero revenue. As such, the median revenue of both groups is equal to zero if the full dataset is used, and no interesting conclusions can be drawn. Therefore we will consider only the horror movies which have non-zero revenue.
 
