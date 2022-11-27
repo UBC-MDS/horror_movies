@@ -70,8 +70,13 @@ Alternatively, one could acheive the same results via:
    - [tidyverse](https://www.tidyverse.org/)
    - [infer](https://github.com/tidymodels/infer)
    - [ggthemes](https://jrnold.github.io/ggthemes/)
+   
+   
+## Licenses
 
+All material for this project is made available under the **Creative Commons Attribution 4.0 Canada License** ([CC BY 4.0 CA](https://creativecommons.org/licenses/by-nc-nd/4.0/)).
 
+This allows for the sharing and adaptation of the datasets for any purpose, provided that the appropriate credit is given.
 
-## The MIT License
+### The MIT License
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  
