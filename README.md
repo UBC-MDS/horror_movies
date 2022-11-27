@@ -44,7 +44,8 @@ For exploratory data analysis, we will have a table for each numerical attribute
 ## Running the Analysis
 
 The current analysis pipeline is as follows:
-0. Clone the repo
+
+(0. Clone the repo)
 1. Open terminal and navigate to the root of the repo
 2. Run `rscript src/down_data.R --url=https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-11-01/horror_movies.csv --out_file=horror_movies_raw`
 3. Run `rscript src/pre_process_horror.R --in_file=horror_movies_raw --out_file=horror_movies_clean`
