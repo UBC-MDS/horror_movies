@@ -54,6 +54,7 @@ The final report can be found [here](https://github.com/UBC-MDS/horror_movies/tr
    - [tidyverse](https://www.tidyverse.org/)
    - [infer](https://github.com/tidymodels/infer)
    - [ggthemes](https://jrnold.github.io/ggthemes/)
+   - [GGally](https://www.r-project.org/nosvn/pandoc/GGally.html)
 
 
 ## Usage

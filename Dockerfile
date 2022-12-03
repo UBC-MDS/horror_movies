@@ -5,14 +5,17 @@
 FROM rocker/tidyverse
 
 # install R packages
-RUN apt-get update -qq && apt-get install build-essential && apt-get -y --no-install-recommends install \
+RUN apt-get update -qq && apt-get -y --no-install-recommends install \
   && install2.r --error \
     --deps TRUE \
     docopt \
     here \
     tidyverse \
+    GGally \
     infer \
     ggthemes
+
+RUN apt-get update && apt-get install make
 
 # install the anaconda distribution of python
 RUN wget --quiet https://repo.anaconda.com/archive/Anaconda3-2019.10-Linux-x86_64.sh -O ~/anaconda.sh && \
@@ -33,5 +36,3 @@ ENV PATH="/opt/conda/bin:${PATH}"
 RUN conda install -y -c anaconda \ 
     docopt \
     jupyterlab
-    
-RUN conda install -y -c conda-forge feather-format
