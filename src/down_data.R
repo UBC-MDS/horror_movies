@@ -4,6 +4,7 @@
 "Downloads csv data from the web to the local /data/raw/ directory as a csv.
 
 Usage: src/down_data.R --url=<url> --out_file=<out_file>
+Example: src/down_data.R --url=https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-11-01/horror_movies.csv --out_file=horror_movies_raw
 
 Options:
 --url=<url>              URL from where to download the data 
@@ -32,7 +33,7 @@ main <- function(url, out_file){
     print("Invalid URL supplied.")
     return()
   }
-  
+
   # Create the filepath to write the downloaded data to
   out_path <- here() |> paste0("/data/raw/", out_file, ".csv")
 

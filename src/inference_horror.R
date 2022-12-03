@@ -176,9 +176,10 @@ main <- function(in_file, out_dir) {
       title = 'Distribution of revenue by rating group'
     )
   
-  
+  try({
+    dir.create(out_dir)
+  })
   #-- Saving results --#
-  
   # Create the directory path to write the results to
   out_path <- here() |> paste0('/', out_dir)
   
