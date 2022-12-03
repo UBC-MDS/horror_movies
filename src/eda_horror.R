@@ -5,8 +5,8 @@
 (from https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-11-01/horror_movies.csv).
 Saves the plots as png files.
 
-Usage: src/eda_hmovies.R --in_file=<in_file> --out_dir=<out_dir>
-Example: Rscript src/eda_hmovies.R --in_file='horror_movies_clean' --out_dir='image'
+Usage: src/eda_horror.R --in_file=<in_file> --out_dir=<out_dir>
+Example: Rscript src/eda_horror.R --in_file='horror_movies_clean' --out_dir='image'
   
 Options:
 --in_file=<in_file>       Filename of clean horror movie data (csv) 
@@ -114,8 +114,10 @@ main <- function(in_file, out_dir) {
          y = 'Density',
          caption = "Figure 1.6: horror movies budget distribution.")
   
-  
   # Create the directory path to write the images to
+  try({
+    dir.create(out_dir)
+  })
   out_path <- here() |> paste0('/', out_dir)
   
   ggsave(paste0(out_path, "/budget_density.png"), 
