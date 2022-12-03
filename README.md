@@ -42,8 +42,25 @@ Since we are doing inference about the median, a CLT-based approach is not appli
 
 For exploratory data analysis, we will have a table for each numerical attribute with their mean, median, quartiles and standard deviations so that we get a rough idea on the distribution of data values. In addition, we will create some tick plots. We will also have pairplots for the correlation between attributes to show the distribution of data points on a pair of attributes. 
 
+The final report can be found [here](https://github.com/UBC-MDS/horror_movies/tree/main/notebooks/EDA_keys.html).
 
 ## Running the Analysis
+
+
+## Dependencies
+- R version 4.2.2 with the following libraries:
+   - [docopt](https://github.com/docopt/docopt.R)
+   - [here](https://here.r-lib.org/)
+   - [tidyverse](https://www.tidyverse.org/)
+   - [infer](https://github.com/tidymodels/infer)
+   - [ggthemes](https://jrnold.github.io/ggthemes/)
+
+
+## Usage
+
+There are two suggested ways to run this analysis:
+
+### 0\. Commands
 
 The current analysis pipeline is as follows:
 
@@ -60,20 +77,37 @@ Alternatively, one could acheive the same results via:
 4. Run `rscript src/eda_horror.R --in_file=horror_movies_clean --out_dir=image`
 5. Run `rscript src/inference_horror.R --in_file=horror_movies_clean --out_dir=results`
 
+### 1\. Using Docker
+
+*note - the instructions in this section also depends on running this in
+a unix shell (e.g., terminal or Git Bash)*
+
+To replicate the analysis, install [Docker](https://www.docker.com/get-started). Then clone this GitHub repository 
+and run the following  command at the command line/terminal from the root directory of this project:
+
+    docker build -t horror_movies:v1 . 
+    docker run --rm -v /$(pwd):/home/data_analysis_eg horror_movies:v1 make -C '/home/data_analysis_eg' all
 
 
+To reset the repo to a clean state, with no intermediate or results files, run the following command at the command 
+line/terminal from the root directory of this project:
+
+    docker run --rm -v /$(pwd):/home/data_analysis_eg horror_movies:v1 make -C '/home/data_analysis_eg' clean
 
 
+### 2\. Without using Docker
 
-## Dependencies
-- R version 4.2.2 with the following libraries:
-   - [docopt](https://github.com/docopt/docopt.R)
-   - [here](https://here.r-lib.org/)
-   - [tidyverse](https://www.tidyverse.org/)
-   - [infer](https://github.com/tidymodels/infer)
-   - [ggthemes](https://jrnold.github.io/ggthemes/)
-   
-   
+To replicate the analysis, clone this GitHub repository, install the [dependencies](#dependencies) listed below, 
+and run the following command at the command line/terminal from the root directory of this project:
+
+    make all
+
+To reset the repo to a clean state, with no intermediate or results files, run the following command at the 
+command line/terminal from the root directory of this project:
+
+    make clean
+
+
 ## Licenses
 
 All material for this project is made available under the **Creative Commons Attribution 4.0 Canada License** ([CC BY 4.0 CA](https://creativecommons.org/licenses/by-nc-nd/4.0/)).
