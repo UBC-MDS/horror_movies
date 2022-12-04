@@ -1,5 +1,5 @@
-# author: Raul Aguilar, team 11
-# date: Nov 23, 2022
+# author: Raul Aguilar
+# date: 2022-11-23
 
 "Creates EDA plots for the pre-processed data from the horror movies dataset.
 (from https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-11-01/horror_movies.csv).
@@ -23,12 +23,14 @@ opt <- docopt(doc)
 main <- function(in_file, out_dir) {
   
   # Imports
-  library(tidyverse)
-  library(here)
-  library(ggthemes)
+  suppressPackageStartupMessages({
+    library(tidyverse)
+    library(here)
+    library(ggthemes)
+  })
   theme_set(theme_minimal())
   
-  # Create the filepath to read the raw data from
+  # Filepath to read the pre-processed data from
   in_path <- here() |> paste0("/data/clean/", in_file, ".csv")
   
   # Safeguard against invalid filenames
@@ -44,7 +46,6 @@ main <- function(in_file, out_dir) {
   
   # EDA
 
-
   horror_scatter_bud <- horror_movies |>
     select(budget, revenue, vote_average) |>
     drop_na() |> 
@@ -59,7 +60,7 @@ main <- function(in_file, out_dir) {
     scale_y_continuous(labels = scales::label_number_si()) +
     scale_x_continuous(labels = scales::label_number_si())
   
-  data_movie <- glimpse(horror_movies) |>
+  data_movie <- horror_movies |>
     select(budget, runtime, revenue, vote_average) |> 
     drop_na()
   
@@ -114,12 +115,14 @@ main <- function(in_file, out_dir) {
          y = 'Density',
          caption = "Figure 1.6: horror movies budget distribution.")
   
-  # Create the directory path to write the images to
-  try({
-    dir.create(out_dir)
-  })
-  out_path <- here() |> paste0('/', out_dir)
   
+  # Ensure the directory to write the images to exists
+  out_path <- here() |> paste0("/", out_dir)
+  try({
+    dir.create(out_path)
+  })
+  
+  # Save the images
   ggsave(paste0(out_path, "/budget_density.png"), 
          budget_density,
          width = 8, 
@@ -150,6 +153,5 @@ main <- function(in_file, out_dir) {
          width = 8, 
          height = 10)
 }
-
 
 main(opt$in_file, opt$out_dir)

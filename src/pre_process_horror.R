@@ -22,10 +22,12 @@ opt <- docopt(doc)
 main <- function(in_file, out_file){
   
   # Imports
-  library(tidyverse)
-  library(here)
-
-  # Create the filepath to read the raw data from
+  suppressPackageStartupMessages({
+    library(tidyverse)
+    library(here)
+  })
+    
+  # Filepath to read the raw data from
   in_path <- here() |> paste0("/data/raw/", in_file, ".csv")
   
   # Safeguard against invalid filenames

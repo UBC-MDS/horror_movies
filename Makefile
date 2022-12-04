@@ -53,3 +53,4 @@ results/EDA_keys.html: image/budget_density.png \
 
 clean: 
 	rm -rf data/* image results
+	
