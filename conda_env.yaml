@@ -1,0 +1,7 @@
+name: horror_movies
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - jupyter
