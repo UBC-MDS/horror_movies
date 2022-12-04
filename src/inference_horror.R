@@ -30,13 +30,15 @@ main <- function(in_file, out_dir) {
   #-- Setup --#
   
   # Imports
-  library(tidyverse)
-  library(infer)
-  library(here)
-  library(ggthemes)
+  suppressPackageStartupMessages({
+    library(tidyverse)
+    library(infer)
+    library(here)
+    library(ggthemes)
+  })
   theme_set(theme_minimal())
   
-  # Create the filepath to read the raw data from
+  # Filepath to read the pre-processed data from
   in_path <- here() |> paste0("/data/clean/", in_file, ".csv")
   
   # Safeguard against invalid filenames
@@ -99,7 +101,7 @@ main <- function(in_file, out_dir) {
   }
   
   alpha <- 0.05
-  rejection_point<- null_dist_revenue |> 
+  rejection_point <- null_dist_revenue |> 
     pull(stat) |> 
     quantile(1 - alpha)
   
@@ -123,7 +125,7 @@ main <- function(in_file, out_dir) {
   revenue_null_dist_plot <- null_dist_revenue |>  
     ggplot(aes(x = stat)) + 
     geom_histogram(
-      aes(y = ..density..), 
+      aes(y = after_stat(density)), 
       colour = 'black', 
       alpha = 0.5,
       binwidth=3e5
@@ -176,13 +178,16 @@ main <- function(in_file, out_dir) {
       title = 'Distribution of revenue by rating group'
     )
   
-  try({
-    dir.create(out_dir)
-  })
-  #-- Saving results --#
-  # Create the directory path to write the results to
-  out_path <- here() |> paste0('/', out_dir)
   
+  #-- Saving results --#
+  
+  # Ensure the directory to write the images to exists
+  out_path <- here() |> paste0("/", out_dir)
+  try({
+    dir.create(out_path)
+  })
+  
+  # Save the results
   write_csv(
     horror_summary_stats, 
     paste0(out_path, "/horror_movie_summary_stats.csv")

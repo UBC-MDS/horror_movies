@@ -14465,10 +14465,6 @@ a.anchor-link {
   display: none;
 }
 
-.highlight  {
-  margin: 0.4em;
-}
-
 /* Input area styling */
 .jp-InputArea {
   overflow: hidden;
@@ -14478,9 +14474,26 @@ a.anchor-link {
   overflow: hidden;
 }
 
-.CodeMirror pre {
+.CodeMirror.cm-s-jupyter .highlight pre {
+/* weird, but --jp-code-padding defined to be 5px but 4px horizontal padding is hardcoded for pre.CodeMirror-line */
+  padding: var(--jp-code-padding) 4px;
   margin: 0;
-  padding: 0;
+
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+
+}
+
+.jp-OutputArea-output pre {
+  line-height: inherit;
+  font-family: inherit;
+}
+
+.jp-RenderedText pre {
+  color: var(--jp-content-font-color1);
+  font-size: var(--jp-code-font-size);
 }
 
 /* Using table instead of flexbox so that we can use break-inside property */
@@ -14560,12 +14573,12 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
                 },
                 displayAlign: 'center',
                 CommonHTML: {
-                    linebreaks: { 
-                    automatic: true 
+                    linebreaks: {
+                    automatic: true
                     }
                 }
             });
-        
+
             MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
         }
     }
@@ -14629,7 +14642,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="EDA-Analysis-Result">EDA Analysis Result<a class="anchor-link" href="#EDA-Analysis-Result">&#182;</a></h2><p>Here, we first want to see the distribution for <code>vote_average</code> and <code>revenue</code> respectively.</p>
 <p><img src="https://raw.githubusercontent.com/UBC-MDS/horror_movies/main/image/vote_avg_density.png"  width="300" height="100"> <img src="https://raw.githubusercontent.com/UBC-MDS/horror_movies/main/image/revenue_density.png"  width="300" height="100"></p>
-<p><img src="https://raw.githubusercontent.com/UBC-MDS/horror_movies/main/image/horror_scatter_vote.png"  width="300" height="100"></p>
+<img src="https://raw.githubusercontent.com/UBC-MDS/horror_movies/main/image/horror_scatter_vote.png"  width="300" height="100">
 <p>Then, we first want to explore the pairwise correlation between several important variables, including:</p>
 <ul>
 <li>budget</li>
@@ -14637,9 +14650,9 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <li>revenue</li>
 <li>vote_average</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/UBC-MDS/horror_movies/main/image/attribute_pairs.png"  width="600" height="100"></p>
+<img src="https://raw.githubusercontent.com/UBC-MDS/horror_movies/main/image/attribute_pairs.png"  width="600" height="100">
 <p>To target our research question, we also plot out the correlation between <code>vote_average</code> and <code>revenue</code>:</p>
-<p><img src="https://raw.githubusercontent.com/UBC-MDS/horror_movies/main/image/horror_scatter_vote.png" width="300" height="100"></p>
+<img src="https://raw.githubusercontent.com/UBC-MDS/horror_movies/main/image/horror_scatter_vote.png" width="300" height="100">
 
 </div>
 </div>
@@ -14652,61 +14665,26 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Hypothesis-Testing-Result">Hypothesis Testing Result<a class="anchor-link" href="#Hypothesis-Testing-Result">&#182;</a></h2><p>We set up a one-tailed hypothesis test to answer the following question:</p>
-<p>"Do horror movies with a higher rating also have higher revenue than those with a lower rating?"</p>
+<p>&quot;Do horror movies with a higher rating also have higher revenue than those with a lower rating?&quot;</p>
 <p>Mathematically, we have set up the following metrics:</p>
 <ul>
-<li><code>test statistic</code>: $Median_{movies\_high} - Median_{movies\_low}$ </li>
+<li><code>test statistic</code>: $Median_{movies\_high} - Median_{movies\_low}$</li>
 <li><code>Null Hypothesis</code>: $H_0$: $Median_{movies\_high} - Median_{movies\_low}$ = 0</li>
 <li><code>Alternative Hypothesis</code>: $H_1$: $Median_{movies\_high} - Median_{movies\_low}$ &gt; 0</li>
 </ul>
 <p>For this test, we will use $\alpha = 0.05$ as our confidence level.</p>
 <p>Some findings (analysis to be added):</p>
-<p><img src="https://raw.githubusercontent.com/UBC-MDS/horror_movies/main/results/revenue_null_distribution.png" width="400" height="100"></p>
-<table>
-<thead><tr>
-<th>observed_test_stat</th>
-<th>p_value</th>
-<th>null_dist_q95</th>
-<th>null_dist_mean</th>
-<th>null_dist_se</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>9007166.5</td>
-<td>1.5e-4</td>
-<td>2429231.5999999987</td>
-<td>8042.138475000001</td>
-<td>1487583.7235765792</td>
-</tr>
-</tbody>
-</table>
+<img src="https://raw.githubusercontent.com/UBC-MDS/horror_movies/main/results/revenue_null_distribution.png" width="400" height="100">
+<p>|observed_test_stat|p_value|null_dist_q95     |null_dist_mean   |null_dist_se      |
+|------------------|-------|------------------|-----------------|------------------|
+|9007166.5         |1.5e-4 |2429231.5999999987|8042.138475000001|1487583.7235765792|</p>
 <p>From the result above, we observe that <code>p_value</code> is much smaller than the confidence level, therefore, we conclude that we have sufficient evidence to reject the null hypothesis. We also expect the median revenue of higher rated horror movies to be $8042.14 higher than the median revenue of lower rated horror movies.</p>
 <p>Since we observed a large standard error (variation in revenue), we are interested to see the distribution of the revenue for these two groups.</p>
-<p><img src="https://raw.githubusercontent.com/UBC-MDS/horror_movies/main/results/revenue_violin_by_rating.png" width="400" height="100"></p>
-<table>
-<thead><tr>
-<th>rating_group</th>
-<th>sample_median</th>
-<th>sample_sd</th>
-<th>sample_size</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>high</td>
-<td>12717468</td>
-<td>79135511.97789192</td>
-<td>634</td>
-</tr>
-<tr>
-<td>low</td>
-<td>3710301.5</td>
-<td>42174996.847960226</td>
-<td>692</td>
-</tr>
-</tbody>
-</table>
+<img src="https://raw.githubusercontent.com/UBC-MDS/horror_movies/main/results/revenue_violin_by_rating.png" width="400" height="100">
+<p>|rating_group|sample_median|sample_sd         |sample_size      |
+|------------|-------------|------------------|-----------------|
+|high        |12717468     |79135511.97789192 |634              |
+|low         |3710301.5    |42174996.847960226|692              |</p>
 <p>We observed that the sample sizes for the two groups are balanced, and both have a large variation within the group. The sample median revenue for group that is highly rated is much larger than the sample median revenue for poorly rated group.</p>
 
 </div>
