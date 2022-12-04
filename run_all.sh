@@ -11,6 +11,8 @@
 # bash run_all.sh
 
 
+set -x # Output commands to terminal as they are run
+
 # Download the raw data
 Rscript src/down_data.R \
 	--url=https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-11-01/horror_movies.csv \
@@ -32,5 +34,7 @@ Rscript src/inference_horror.R \
 	--out_dir=results
 
 # Render the report
-python -m jupyter nbconvert --to html notebooks/EDA_keys.ipynb --output-dir=results
+python -m jupyter nbconvert \
+--to html notebooks/EDA_keys.ipynb \
+--output-dir=results
 

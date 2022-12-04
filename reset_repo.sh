@@ -10,6 +10,8 @@
 # bash reset_repo.sh
 
 
+set -x  # Output commands to terminal as they are run
+
 # Delete all intermediate files and results files
 rm -rf data/* image results
 

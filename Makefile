@@ -49,7 +49,9 @@ results/EDA_keys.html: image/budget_density.png \
  results/revenue_null_distribution.png \
  results/revenue_violin_by_rating.png \
  notebooks/EDA_keys.ipynb
-	python -m jupyter nbconvert --to html notebooks/EDA_keys.ipynb --output-dir=results
+	python -m jupyter nbconvert \
+	--to html notebooks/EDA_keys.ipynb \
+	--output-dir=results
 
 clean: 
 	rm -rf data/* image results

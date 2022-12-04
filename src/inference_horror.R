@@ -63,8 +63,12 @@ main <- function(in_file, out_dir) {
       sample_size = n()
     )
   
-  # Generate simulation-based null distribution via permutation 
+  # Generate simulation-based null distribution via permutation
   n_reps <- 20000
+  cat(paste0(
+    "Generating simulation-based null distribution via permutation.\n",
+  "Using ", n_reps, " repititions. This may take a while.\n"
+  ))
   set.seed(1234)
   null_dist_revenue <- horror_movies |>
     specify(formula = revenue ~ rating_group) |> 
