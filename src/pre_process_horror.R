@@ -62,9 +62,14 @@ main <- function(in_file, out_file){
       )                               
     )
 
-  # Create the filepath to write the cleaned data to
-  out_path <- here() |> paste0("/data/clean/", out_file, ".csv")
+  # Ensure the directory to write the pre-processed data to exists
+  out_dir <- here() |> paste0("/data/clean")
+  try({
+    dir.create(out_dir)
+  })
   
+  # Save the pre-processed data
+  out_path <- out_dir |> paste0("/", out_file, ".csv")
   write_csv(movies_clean, out_path)
 }
 

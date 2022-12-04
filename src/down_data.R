@@ -34,9 +34,14 @@ main <- function(url, out_file){
     return()
   }
 
-  # Create the filepath to write the downloaded data to
-  out_path <- here() |> paste0("/data/raw/", out_file, ".csv")
-
+  # Ensure the directory to write the downloaded data to exists
+  out_dir <- here() |> paste0("/data/raw")
+  try({
+    dir.create(out_dir)
+  })
+  
+  # Save the downloaded data
+  out_path <- out_dir |> paste0("/", out_file, ".csv")
   write_csv(dat, out_path)
 }
 
