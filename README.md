@@ -9,6 +9,8 @@ We are team 11 for DSCI 522 of the UBC MDS program (2022/23 cohort).
 - Xinru Lu
 - Jakob Thoms
 
+
+
 ## Project Proposal
 
 ### Dataset
@@ -44,10 +46,14 @@ For exploratory data analysis, we will have a table for each numerical attribute
 
 The final report can be found [here](https://github.com/UBC-MDS/horror_movies/tree/main/notebooks/EDA_keys.html).
 
+
+
+
+
 ## Running the Analysis
 
 
-## Dependencies
+### Dependencies
 - R version 4.2.2 with the following libraries:
    - [docopt](https://github.com/docopt/docopt.R)
    - [here](https://here.r-lib.org/)
@@ -57,56 +63,45 @@ The final report can be found [here](https://github.com/UBC-MDS/horror_movies/tr
    - [GGally](https://www.r-project.org/nosvn/pandoc/GGally.html)
 
 
-## Usage
+### Usage
 
 There are two suggested ways to run this analysis:
 
-### 0\. Commands
+#### 1\. Using Make (without Docker)
 
-The current analysis pipeline is as follows:
+To replicate this analysis:
 
-(0. Clone the repo)
-1. Open terminal and navigate to the root of the repo
-2. Run `bash run_all.sh`.
+0. Clone this repository and install the [dependencies](#dependencies) listed above
+1. Open command line and navigate to the root directory the local repository
+2. Run `make all`.
 
-This should populate the `/data`, `/image`, and `/results` directories of your repo with the most up-to-date data. 
 
-Alternatively, one could acheive the same results via:
-1. Open terminal and navigate to the root of the repo
-2. Run `rscript src/down_data.R --url=https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-11-01/horror_movies.csv --out_file=horror_movies_raw`
-3. Run `rscript src/pre_process_horror.R --in_file=horror_movies_raw --out_file=horror_movies_clean`
-4. Run `rscript src/eda_horror.R --in_file=horror_movies_clean --out_dir=image`
-5. Run `rscript src/inference_horror.R --in_file=horror_movies_clean --out_dir=results`
+To reset the local repository to a clean state, with no intermediate files or results files:
 
-### 1\. Using Docker
+1. Open command line and navigate to the root directory the repository
+2. Run `make clean`
+
+#### 2\. Using Docker
 
 *note - the instructions in this section also depends on running this in
 a unix shell (e.g., terminal or Git Bash)*
 
-To replicate the analysis, install [Docker](https://www.docker.com/get-started). Then clone this GitHub repository 
-and run the following  command at the command line/terminal from the root directory of this project:
+To replicate this analysis:
 
-    docker build -t horror_movies:v1 . 
-    docker run --rm -v /$(pwd):/home/data_analysis_eg horror_movies:v1 make -C '/home/data_analysis_eg' all
-
-
-To reset the repo to a clean state, with no intermediate or results files, run the following command at the command 
-line/terminal from the root directory of this project:
-
-    docker run --rm -v /$(pwd):/home/data_analysis_eg horror_movies:v1 make -C '/home/data_analysis_eg' clean
+0. Clone this repository and install [Docker](https://www.docker.com/get-started)
+1. Open command line and navigate to the root directory the local repository
+2. Run `docker build -t horror_movies:v1 . `
+3. Run `docker run --rm -v /$(pwd):/home/data_analysis_eg horror_movies:v1 make -C '/home/data_analysis_eg' all`
 
 
-### 2\. Without using Docker
+To reset the local repository to a clean state, with no intermediate files or results files:
 
-To replicate the analysis, clone this GitHub repository, install the [dependencies](#dependencies) listed below, 
-and run the following command at the command line/terminal from the root directory of this project:
+1. Open command line and navigate to the root directory the repository
+2. Run `docker run --rm -v /$(pwd):/home/data_analysis_eg horror_movies:v1 make -C '/home/data_analysis_eg' clean`
 
-    make all
 
-To reset the repo to a clean state, with no intermediate or results files, run the following command at the 
-command line/terminal from the root directory of this project:
 
-    make clean
+
 
 
 ## Licenses
