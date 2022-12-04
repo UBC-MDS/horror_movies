@@ -61,6 +61,9 @@ The final report can be found [here](https://github.com/UBC-MDS/horror_movies/tr
    - [infer](https://github.com/tidymodels/infer)
    - [ggthemes](https://jrnold.github.io/ggthemes/)
    - [GGally](https://www.r-project.org/nosvn/pandoc/GGally.html)
+- Python version 3.11 with the following libraries:
+   - [jupyter](https://jupyter.org/install)
+   
 
 
 ### Usage
