@@ -19,6 +19,57 @@ Options:
 library(docopt)
 opt <- docopt(doc)
 
+plot_corr <- function(data_movie){
+  GGally::ggpairs(data_movie, aes(color = "#00AFBB", alpha= 0.3, fill = "#00AFBB"), progress = FALSE) +
+    ggtitle('Horror movies attributes correlation') + 
+    labs(caption = "Figure 1.1: horror movies revenue, runtime, vote average and budget attributes correlation.") + theme(text =  element_text(size = 18))
+  
+}
+plot_horror_scatter_bud <- function(horror_movies) {
+  horror_movies |>
+    select(budget, revenue, vote_average) |>
+    drop_na() |> 
+    ggplot(aes(x = vote_average, y = revenue)) +
+    geom_point(alpha = 0.3, color="#ff4500", size=3) +
+    ggtitle('Does higher rating movies gross more?') +
+    labs(x = 'Vote average',
+         y = 'Revenue',
+         caption = "Figure 1.2: horror movies revenue - vote average correlation.") +
+    theme(text =  element_text(size = 18)) +
+    scale_size(range = c(0, 10)) +
+    scale_y_continuous(labels = scales::label_number_si()) +
+    scale_x_continuous(labels = scales::label_number_si())
+}
+
+plot_horror_scatter_vote <- function(horror_movies) {
+  horror_movies |>
+    select(budget, revenue, vote_average) |>
+    drop_na() |> 
+    ggplot(aes(x = budget, y = revenue, size = vote_average)) +
+    geom_point(alpha = 0.3, color="#ff4500", size=3) +
+    ggtitle('Does higher budget movies gross more?') +
+    labs(x = 'Budget', y = 'Revenue', 
+         caption = "Figure 1.3: horror movies revenue - budget correlation.") +
+    theme(text =  element_text(size = 18)) +
+    scale_size(range = c(0, 10)) +
+    scale_y_continuous(labels = scales::label_number_si()) +
+    scale_x_continuous(labels = scales::label_number_si())
+}
+
+plot_density <- function(horror_movies, col, col_name, figure_name) {
+  horror_movies |> 
+    filter({{col}}>0) |> 
+    drop_na() |> 
+    ggplot(aes(x = {{col}})) + 
+    geom_density(color = "#00AFBB", alpha= 0.3, fill = "#00AFBB") + 
+    ggtitle(paste(col_name,' Density')) +
+    scale_x_continuous(labels = scales::label_number_si()) +
+    theme(text =  element_text(size = 18)) +
+    labs(x = col_name, 
+         y = 'Density',
+         caption = figure_name)
+}
+
 # Main driver function
 main <- function(in_file, out_dir) {
   
@@ -44,112 +95,50 @@ main <- function(in_file, out_dir) {
   }
   
   
-  # EDA
-
-  horror_scatter_bud <- horror_movies |>
-    select(budget, revenue, vote_average) |>
-    drop_na() |> 
-    ggplot(aes(x = vote_average, y = revenue)) +
-    geom_point(alpha = 0.3, color="#ff4500", size=3) +
-    ggtitle('Does higher rating movies gross more?') +
-    labs(x = 'Vote average',
-         y = 'Revenue',
-         caption = "Figure 1.2: horror movies revenue - vote average correlation.") +
-    theme(text =  element_text(size = 18)) +
-    scale_size(range = c(0, 10)) +
-    scale_y_continuous(labels = scales::label_number_si()) +
-    scale_x_continuous(labels = scales::label_number_si())
-  
-  data_movie <- horror_movies |>
-    select(budget, runtime, revenue, vote_average) |> 
-    drop_na()
-  
-  pairs <- GGally::ggpairs(data_movie, aes(color = "#00AFBB", alpha= 0.3, fill = "#00AFBB"), progress = FALSE) +
-    ggtitle('Horror movies attributes correlation') + 
-    labs(caption = "Figure 1.1: horror movies revenue, runtime, vote average and budget attributes correlation.") + theme(text =  element_text(size = 18))
-  
-  horror_scatter_vote <- horror_movies |>
-    select(budget, revenue, vote_average) |>
-    drop_na() |> 
-    ggplot(aes(x = budget, y = revenue, size = vote_average)) +
-    geom_point(alpha = 0.3, color="#ff4500", size=3) +
-    ggtitle('Does higher budget movies gross more?') +
-    labs(x = 'Budget', y = 'Revenue', 
-         caption = "Figure 1.3: horror movies revenue - budget correlation.") +
-    theme(text =  element_text(size = 18)) +
-    scale_size(range = c(0, 10)) +
-    scale_y_continuous(labels = scales::label_number_si()) +
-    scale_x_continuous(labels = scales::label_number_si())
-  
-  revenue_density <- horror_movies |> 
-    filter(revenue>0) |> 
-    drop_na() |> 
-    ggplot(aes(x = revenue)) + 
-    geom_density(color = "#00AFBB", alpha= 0.3, fill = "#00AFBB") + 
-    ggtitle('Revenue of horror movies') +
-    scale_x_continuous(labels = scales::label_number_si()) +
-    theme(text =  element_text(size = 18)) +
-    labs(x = 'Revenue', 
-         y = 'Density',
-         caption = "Figure 1.4: horror movies revenue distribution.")
-  
-  vote_avg_density <- horror_movies |>
-    filter(vote_average>0)|>
-    ggplot(aes(x = vote_average)) +
-    geom_density(color = "#00AFBB", alpha= 0.3, fill = "#00AFBB") + 
-    ggtitle('Vote average of horror movies') +
-    theme(text =  element_text(size = 18)) +
-    labs(x = 'Vote average',
-         y = 'Density', 
-         caption = "Figure 1.5: horror movies vote average distribution.")
-  
-  budget_density <- horror_movies |> 
-    filter(budget>0) |> 
-    drop_na() |> 
-    ggplot(aes(x = budget)) + 
-    geom_density(color = "#00AFBB", alpha= 0.3, fill = "#00AFBB") + 
-    ggtitle('Horror movies budget') +
-    scale_x_continuous(labels = scales::label_number_si()) +
-    theme(text =  element_text(size = 18)) +
-    labs(x = 'Budget', 
-         y = 'Density',
-         caption = "Figure 1.6: horror movies budget distribution.")
-  
-  
   # Ensure the directory to write the images to exists
   out_path <- here() |> paste0("/", out_dir)
   try({
     dir.create(out_path)
   })
-  
+
   # Save the images
-  ggsave(paste0(out_path, "/budget_density.png"), 
-         budget_density,
-         width = 8, 
-         height = 10) 
+  data_movie <- horror_movies |>
+    select(budget, runtime, revenue, vote_average) |> 
+    drop_na()
   
-  ggsave(paste0(out_path, "/vote_avg_density.png"), 
-         vote_avg_density,
+  pairs <- plot_corr(data_movie)
+  ggsave(paste0(out_path, "/attribute_pairs.png"), 
+         pairs,
          width = 8, 
-         height = 10) 
-  
-  ggsave(paste0(out_path, "/revenue_density.png"), 
-         revenue_density,
-         width = 8, 
-         height = 10) 
-  
-  ggsave(paste0(out_path, "/horror_scatter_vote.png"), 
-         horror_scatter_vote,
-         width = 8, 
-         height = 10)  
-  
+         height = 10)
+
+  horror_scatter_bud <- plot_horror_scatter_bud(horror_movies)
   ggsave(paste0(out_path, "/rating_revenue_corr.png"), 
          horror_scatter_bud,
          width = 8, 
          height = 10)
   
-  ggsave(paste0(out_path, "/attribute_pairs.png"), 
-         pairs,
+  horror_scatter_vote <- plot_horror_scatter_vote(horror_movies)
+  ggsave(paste0(out_path, "/horror_scatter_vote.png"), 
+         horror_scatter_vote,
+         width = 8, 
+         height = 10)
+  
+  revenue_density <- plot_density(horror_movies, revenue, "Revenue", "Figure 1.4: horror movies revenue distribution.")
+  ggsave(paste0(out_path, "/revenue_density.png"), 
+         revenue_density,
+         width = 8, 
+         height = 10) 
+
+  vote_avg_density <- plot_density(horror_movies, vote_average, "Vote average", "Figure 1.5: horror movies vote average distribution.")
+  ggsave(paste0(out_path, "/vote_avg_density.png"), 
+         vote_avg_density,
+         width = 8, 
+         height = 10)
+
+  budget_density <- plot_density(horror_movies, budget, 'Budget',"Figure 1.6: horror movies budget distribution." )
+  ggsave(paste0(out_path, "/budget_density.png"), 
+         budget_density,
          width = 8, 
          height = 10)
 }
