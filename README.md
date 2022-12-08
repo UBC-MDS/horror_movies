@@ -94,13 +94,13 @@ To replicate this analysis:
 0. Clone this repository and install [Docker](https://www.docker.com/get-started)
 1. Open command line and navigate to the root directory the local repository
 2. Run `docker build -t horror_movies:v1 . `
-3. Run `docker run --rm -v /$(pwd):/home/data_analysis_eg horror_movies:v1 make -C '/home/data_analysis_eg' all`
+3. Run `docker run --rm -v /$(pwd):/horror_movies horror_movies:v1 cd horror_movies make all`
 
 
 To reset the local repository to a clean state, with no intermediate files or results files:
 
 1. Open command line and navigate to the root directory the repository
-2. Run `docker run --rm -v /$(pwd):/home/data_analysis_eg horror_movies:v1 make -C '/home/data_analysis_eg' clean`
+2. Run `docker run --rm -v /$(pwd):/horror_movies horror_movies:v1 cd horror_movies make clean`
 
 
 
