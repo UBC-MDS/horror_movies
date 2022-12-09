@@ -19,12 +19,15 @@ Options:
 library(docopt)
 opt <- docopt(doc)
 
+# Correlation plot for meaninful numeric variables
 plot_corr <- function(data_movie){
   GGally::ggpairs(data_movie, aes(color = "#00AFBB", alpha= 0.3, fill = "#00AFBB"), progress = FALSE) +
     ggtitle('Horror movies attributes correlation') + 
     labs(caption = "Figure 1.1: horror movies revenue, runtime, vote average and budget attributes correlation.") + theme(text =  element_text(size = 18))
   
 }
+
+# Scatter plot of vote average and revenue to identify possible correlation
 plot_horror_scatter_bud <- function(horror_movies) {
   horror_movies |>
     select(budget, revenue, vote_average) |>
@@ -41,6 +44,7 @@ plot_horror_scatter_bud <- function(horror_movies) {
     scale_x_continuous(labels = scales::label_number_si())
 }
 
+# Scatter plot of budget and revenue to identify possible correlation for this two variables
 plot_horror_scatter_vote <- function(horror_movies) {
   horror_movies |>
     select(budget, revenue, vote_average) |>
@@ -56,6 +60,7 @@ plot_horror_scatter_vote <- function(horror_movies) {
     scale_x_continuous(labels = scales::label_number_si())
 }
 
+# Density distribution plot of desired column 
 plot_density <- function(horror_movies, col, col_name, figure_name) {
   horror_movies |> 
     filter({{col}}>0) |> 
