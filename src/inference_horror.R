@@ -150,13 +150,17 @@ main <- function(in_file, out_dir) {
       linewidth = 1,
       lty = 5
     ) +
-    xlab("Difference of sample medians of revenue") +
-    ylab("Density") + 
     ggtitle(
       "Simulation-Based Null Distribution",
       subtitle = "Estimated using r=20,000 permuted datasets"
     ) +
-    theme_bw(base_size = 15)
+    theme_bw(base_size = 15) +
+    labs( 
+      y = 'Density',
+      x = 'Difference of sample medians of revenue',
+      caption = 'Figure 2.1: Null distribution,
+       test statistic falls in the rejection area.'
+    )
   
   # Violin plot of revenue distribution by rating
   revenue_dist_by_rating_plot <- ggplot(horror_movies) + 
@@ -179,7 +183,9 @@ main <- function(in_file, out_dir) {
     labs(
       y = 'Rating group',
       x = 'Revenue',
-      title = 'Distribution of revenue by rating group'
+      title = 'Distribution of revenue by rating group', 
+      caption = 'Figure 2.2: Violin plot of revenue distribution by rating,
+      larger spread for for high level rating group.'
     )
   
   
