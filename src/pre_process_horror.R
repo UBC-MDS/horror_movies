@@ -47,8 +47,9 @@ main <- function(in_file, out_file){
               tagline, poster_path, status, 
               backdrop_path, collection, 
               collection_name))|>
-    # Drop movies with very low `vote_count` because
-    # we are using the `vote_average` column.
+    # Drop movies with very low `vote_count` (less than 10)
+    # since we are using the `vote_average` column and the 
+    # extrem low value will affect the average voting score 
     filter(vote_count > 10) |>  
     # Drop movies with zero revenue because we are
     # interested in those with non-zero revenue
