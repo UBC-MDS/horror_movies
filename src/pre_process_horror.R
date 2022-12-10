@@ -30,7 +30,7 @@ main <- function(in_file, out_file){
   # Filepath to read the raw data from
   in_path <- here() |> paste0("/data/raw/", in_file, ".csv")
   
-  # Safeguard against invalid filenames
+  # Ensure the filenames are valid
   raw_dat <- NULL
   try({
     raw_dat <- read_csv(in_path, show_col_types = FALSE)
