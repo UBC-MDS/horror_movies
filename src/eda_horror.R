@@ -108,15 +108,15 @@ main <- function(in_file, out_dir) {
     dir.create(out_path)
   })
 
-  # Save the images
+  # Select variables to generate plots
   data_movie <- horror_movies |>
     select(budget, runtime, revenue, vote_average) |> 
     drop_na()
-  
+ 
   pairs <- plot_corr(data_movie)
   ggsave(paste0(out_path, "/attribute_pairs.png"), 
          pairs,
-         width = 8, 
+         width = 16, 
          height = 10)
 
   horror_scatter_bud <- plot_horror_scatter_bud(horror_movies)

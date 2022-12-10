@@ -30,7 +30,7 @@ main <- function(in_file, out_file){
   # Filepath to read the raw data from
   in_path <- here() |> paste0("/data/raw/", in_file, ".csv")
   
-  # Safeguard against invalid filenames
+  # Ensure the filenames are valid
   raw_dat <- NULL
   try({
     raw_dat <- read_csv(in_path, show_col_types = FALSE)
@@ -47,13 +47,14 @@ main <- function(in_file, out_file){
               tagline, poster_path, status, 
               backdrop_path, collection, 
               collection_name))|>
-    # Drop movies with very low `vote_count` because
-    # we are using the `vote_average` column.
+    # Drop movies with very low `vote_count` (less than 10)
+    # since we are using the `vote_average` column and the 
+    # extrem low value will affect the average voting score 
     filter(vote_count > 10) |>  
     # Drop movies with zero revenue because we are
     # interested in those with non-zero revenue
     filter(!revenue==0) |> 
-    # Create a new column, `rating_group`, which is 'high' for observations
+    # Create a new column, `rating_group`, which is 'high' for observations base on median value
     # with `vote_average` greater than the median horror movie `vote_average`,
     # and 'low' otherwise.
     mutate(
@@ -70,9 +71,9 @@ main <- function(in_file, out_file){
     dir.create(out_dir)
   })
   
-  # Save the pre-processed data
+  # Save the pre-processed data to the out_path
   out_path <- out_dir |> paste0("/", out_file, ".csv")
   write_csv(movies_clean, out_path)
 }
-
+  # Call the main function
 main(opt$in_file, opt$out_file)

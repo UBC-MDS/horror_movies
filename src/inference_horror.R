@@ -69,6 +69,7 @@ main <- function(in_file, out_dir) {
     "Generating simulation-based null distribution via permutation.\n",
   "Using ", n_reps, " repititions. This may take a while.\n"
   ))
+  # Ensure the result reproducible
   set.seed(1234)
   null_dist_revenue <- horror_movies |>
     specify(formula = revenue ~ rating_group) |> 
@@ -103,7 +104,7 @@ main <- function(in_file, out_dir) {
   if (p_val == 0){
     p_val <- 3/n_reps
   }
-  
+  # Set significance level
   alpha <- 0.05
   rejection_point <- null_dist_revenue |> 
     pull(stat) |> 
