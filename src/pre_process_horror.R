@@ -70,7 +70,7 @@ main <- function(in_file, out_file){
     dir.create(out_dir)
   })
   
-  # Save the pre-processed data
+  # Save the pre-processed data to the out_path
   out_path <- out_dir |> paste0("/", out_file, ".csv")
   write_csv(movies_clean, out_path)
 }
