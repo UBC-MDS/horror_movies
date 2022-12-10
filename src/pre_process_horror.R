@@ -53,7 +53,7 @@ main <- function(in_file, out_file){
     # Drop movies with zero revenue because we are
     # interested in those with non-zero revenue
     filter(!revenue==0) |> 
-    # Create a new column, `rating_group`, which is 'high' for observations
+    # Create a new column, `rating_group`, which is 'high' for observations base on median value
     # with `vote_average` greater than the median horror movie `vote_average`,
     # and 'low' otherwise.
     mutate(
