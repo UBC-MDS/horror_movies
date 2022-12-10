@@ -114,7 +114,7 @@ main <- function(in_file, out_dir) {
   pairs <- plot_corr(data_movie)
   ggsave(paste0(out_path, "/attribute_pairs.png"), 
          pairs,
-         width = 8, 
+         width = 16, 
          height = 10)
   # Save p plot
   horror_scatter_bud <- plot_horror_scatter_bud(horror_movies)
