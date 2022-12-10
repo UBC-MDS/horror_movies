@@ -75,5 +75,5 @@ main <- function(in_file, out_file){
   out_path <- out_dir |> paste0("/", out_file, ".csv")
   write_csv(movies_clean, out_path)
 }
-
+  # Call the main function
 main(opt$in_file, opt$out_file)
