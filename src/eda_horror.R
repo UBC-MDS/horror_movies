@@ -33,7 +33,8 @@ plot_horror_scatter_bud <- function(horror_movies) {
     select(budget, revenue, vote_average) |>
     drop_na() |> 
     ggplot(aes(x = vote_average, y = revenue)) +
-    geom_point(alpha = 0.3, color="#ff4500", size=3) +
+    geom_bin2d() +
+    scale_fill_gradient(low="lightblue" ,high="darkblue", trans="log10") +
     ggtitle('Does higher rating movies gross more?') +
     labs(x = 'Vote average',
          y = 'Revenue',
@@ -50,7 +51,8 @@ plot_horror_scatter_vote <- function(horror_movies) {
     select(budget, revenue, vote_average) |>
     drop_na() |> 
     ggplot(aes(x = budget, y = revenue, size = vote_average)) +
-    geom_point(alpha = 0.3, color="#ff4500", size=3) +
+    geom_bin2d() +
+    scale_fill_gradient(low="lightblue" ,high="darkblue", trans="log10") +
     ggtitle('Does higher budget movies gross more?') +
     labs(x = 'Budget', y = 'Revenue', 
          caption = "Figure 1.3: horror movies revenue - budget correlation.") +
