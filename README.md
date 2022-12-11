@@ -44,7 +44,7 @@ Since we are doing inference about the median, a CLT-based approach is not appli
 
 For exploratory data analysis, we will have a table for each numerical attribute with their mean, median, quartiles and standard deviations so that we get a rough idea on the distribution of data values. In addition, we will create some tick plots. We will also have pairplots for the correlation between attributes to show the distribution of data points on a pair of attributes. 
 
-The final report can be found [here](https://github.com/UBC-MDS/horror_movies/tree/main/notebooks/EDA_keys.html).
+The final report can be found [here](https://github.com/UBC-MDS/horror_movies/tree/main/results/report.html).
 
 
 
