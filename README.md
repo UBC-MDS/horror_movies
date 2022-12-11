@@ -68,6 +68,8 @@ The final report can be found [here](https://github.com/UBC-MDS/horror_movies/tr
 
 ### Usage
 
+[See makefile graph](https://github.com/UBC-MDS/horror_movies/blob/main/Makefile.png)
+
 There are two suggested ways to run this analysis:
 
 #### 1\. Using Make (without Docker)
