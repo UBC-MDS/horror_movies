@@ -35,6 +35,6 @@ Rscript src/inference_horror.R \
 
 # Render the report
 python -m jupyter nbconvert \
---to html notebooks/EDA_keys.ipynb \
+--to html notebooks/report.ipynb \
 --output-dir=results
 
