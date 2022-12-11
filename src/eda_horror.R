@@ -77,6 +77,34 @@ plot_density <- function(horror_movies, col, col_name, figure_name) {
          caption = figure_name)
 }
 
+# Violin plot of revenue distribution by rating
+plot_revenue_dist_by_rating <- function(horror_movies){
+  ggplot(horror_movies) + 
+  aes(
+    x = revenue,
+    y = rating_group
+  ) +
+  geom_violin(
+    fill = 'blue',
+    alpha = 0.3
+  ) +
+  geom_point(
+    stat = 'summary', 
+    fun = median,
+    size = 1,
+    color = 'black',
+    shape = 16
+  ) +
+  theme_bw(base_size = 15) +
+  labs(
+    y = 'Rating group',
+    x = 'Revenue',
+    title = 'Distribution of revenue by rating group', 
+    caption = 'Figure 2.2: Violin plot of revenue distribution by rating,
+      larger spread for for high level rating group.'
+  )
+}
+
 # Main driver function
 main <- function(in_file, out_dir) {
   
@@ -146,6 +174,11 @@ main <- function(in_file, out_dir) {
   budget_density <- plot_density(horror_movies, budget, 'Budget',"Figure 1.6: horror movies budget distribution." )
   ggsave(paste0(out_path, "/budget_density.png"), 
          budget_density,
+         width = 8, 
+         height = 10)
+  revenue_dist_by_rating <- plot_revenue_dist_by_rating(horror_movies)
+  ggsave(paste0(out_path, "/revenue_dist_by_rating.png"), 
+         revenue_dist_by_rating,
          width = 8, 
          height = 10)
 }

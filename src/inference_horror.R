@@ -163,32 +163,6 @@ main <- function(in_file, out_dir) {
        test statistic falls in the rejection area.'
     )
   
-  # Violin plot of revenue distribution by rating
-  revenue_dist_by_rating_plot <- ggplot(horror_movies) + 
-    aes(
-      x = revenue,
-      y = rating_group
-    ) +
-    geom_violin(
-      fill = 'blue',
-      alpha = 0.3
-    ) +
-    geom_point(
-      stat = 'summary', 
-      fun = median,
-      size = 1,
-      color = 'black',
-      shape = 16
-    ) +
-    theme_bw(base_size = 15) +
-    labs(
-      y = 'Rating group',
-      x = 'Revenue',
-      title = 'Distribution of revenue by rating group', 
-      caption = 'Figure 2.2: Violin plot of revenue distribution by rating,
-      larger spread for for high level rating group.'
-    )
-  
   
   #-- Saving results --#
   
@@ -210,11 +184,6 @@ main <- function(in_file, out_dir) {
   ggsave(
     paste0(out_path, "/revenue_null_distribution.png"), 
     revenue_null_dist_plot,
-    width = 8, height = 10
-  ) 
-  ggsave(
-    paste0(out_path, "/revenue_violin_by_rating.png"), 
-    revenue_dist_by_rating_plot,
     width = 8, height = 10
   ) 
 }

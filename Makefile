@@ -2,7 +2,7 @@
 # author: Xinru Lu
 # date: 2022-12-03
 
-all: results/EDA_keys.html
+all: results/report.html
 
 # download raw data
 data/raw/horror_movies_raw.csv: src/down_data.R
@@ -23,7 +23,8 @@ image/vote_avg_density.png \
 image/revenue_density.png \
 image/horror_scatter_vote.png \
 image/rating_revenue_corr.png \
-image/attribute_pairs.png: data/clean/horror_movies_clean.csv \
+image/attribute_pairs.png \
+image/revenue_dist_by_rating.png: data/clean/horror_movies_clean.csv \
  src/eda_horror.R
 	Rscript src/eda_horror.R \
 	--in_file=horror_movies_clean \
@@ -32,25 +33,24 @@ image/attribute_pairs.png: data/clean/horror_movies_clean.csv \
 # hypothesis testing
 results/horror_movie_summary_stats.csv \
 results/horror_movie_hypothesis_test_results.csv \
-results/revenue_null_distribution.png \
-results/revenue_violin_by_rating.png: data/clean/horror_movies_clean.csv \
+results/revenue_null_distribution.png: data/clean/horror_movies_clean.csv \
  src/inference_horror.R
 	Rscript src/inference_horror.R \
 	--in_file=horror_movies_clean \
 	--out_dir=results
 
 # render report
-results/EDA_keys.html: image/budget_density.png \
+results/report.html: image/budget_density.png \
  image/vote_avg_density.png \
  image/revenue_density.png \
  image/horror_scatter_vote.png \
  image/rating_revenue_corr.png \
  image/attribute_pairs.png \
+ image/revenue_dist_by_rating.png \
  results/revenue_null_distribution.png \
- results/revenue_violin_by_rating.png \
- notebooks/EDA_keys.ipynb
+ notebooks/report.ipynb
 	python -m jupyter nbconvert \
-	--to html notebooks/EDA_keys.ipynb \
+	--to html notebooks/report.ipynb \
 	--output-dir=results
 
 clean: 
